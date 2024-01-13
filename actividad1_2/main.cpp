@@ -1,6 +1,7 @@
 // =========================================================
 // File: main.cpp
-// Author: Fernando Israel Rios Garcia-A01709118
+// Authors
+//   - Fernando Israel Rios Garcia-A01709118
 // Date: Noviembre 12th, 2024
 // =========================================================
 
@@ -29,5 +30,5 @@ using namespace std;
 
 int main ()
 {
-    
+    int length, typeSortAlgoritm, typeSearchAlgorithm;
 }
