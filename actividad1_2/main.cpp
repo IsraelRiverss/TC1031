@@ -7,14 +7,14 @@
 
 /*
  Compilación con debug:
- *  g++ -std=c++17 *.cpp -Wall -g -o main
- *
- * Compilación para ejecucion:
- *  g++ -std=c++17 *.cpp -Wall -O3 -o main
- *
- * Ejecución con redireccion (input and output):
- *  ./main < TestCases/t1.txt
- *  ./main < TestCases/t2.txt > salida.txt
+    g++ -std=c++17 .cpp -Wall -g -o main
+ 
+  Compilación para ejecucion:
+    g++ -std=c++17 ./actividad1_2/main.cpp -Wall -o3 -o main
+ 
+  Ejecución con redireccion (input and output):
+    ./main < ./actividad1_2/TestCases/test01.txt
+    ./main < ./actividad1_2/TestCases/test01.txt > salida.txt
 */
 
 //Files 
