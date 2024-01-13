@@ -30,5 +30,13 @@ using namespace std;
 
 int main ()
 {
-    int length, typeSortAlgoritm, typeSearchAlgorithm;
+    //Vairables for the length of the array, the type of sorting algorithm, the type of search algorithm and the serched number in a sorted array
+    int length, typeSortAlgoritm, typeSearchAlgorithm, n; //Initialize variables
+    cin >> length; cin >> typeSortAlgoritm; cin >> typeSearchAlgorithm; cin >> n; //Delcare and read vairiables
+    vector<int> vector; //Vector to store test cases
+
+    vector.resize(length); //Resize vector to length
+    for (int i = 0; i < length; i++) //Read test cases
+        
+    
 }
