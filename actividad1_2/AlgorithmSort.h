@@ -67,6 +67,7 @@ void AlgorithmSort<T>::bubbleSort(std::vector<T> &A, int n, unsigned int &compar
   }
 }
 
+
 template <class T>
 void AlgorithmSort<T>::merge(std::vector<T> &A, int low, int m, int high, unsigned int &compara) {
   int i, j, k;
@@ -107,6 +108,7 @@ void AlgorithmSort<T>::merge(std::vector<T> &A, int low, int m, int high, unsign
   }
 }
 
+// O(n log n)
 template <class T>
 void AlgorithmSort<T>::mergeSort(std::vector<T> &A, int low, int high, unsigned int &compara) {
   if (low < high) {
@@ -137,6 +139,7 @@ int AlgorithmSort<T>::partition(std::vector<T> &A, int low, int high, unsigned i
   return i + 1;
 }
 
+// O(n^2)
 template <class T>
 void AlgorithmSort<T>::quickSort(std::vector<T> &A, int low, int high, unsigned int &compara, unsigned int &swap) {
   if (low < high) {
