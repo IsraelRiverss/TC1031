@@ -6,20 +6,18 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 class Registro {
 private:
-  string mes;
-  string dia;
-  string horas;
-  string minutos;
-  string segundos;
-  string ip;
-  string puerto;
-  string falla;
+  std::string mes;
+  std::string dia;
+  std::string horas;
+  std::string minutos;
+  std::string segundos;
+  std::string ip;
+  std::string puerto;
+  std::string falla;
 
-  vector<string> meses = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+  std::vector<std::string> meses = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
   // https://cplusplus.com/reference/ctime/tm/
   struct tm dateStruct;
@@ -28,8 +26,9 @@ private:
 
 public:
   Registro();
-  Registro(string _mes, string _dia, string _horas, string _minutos, string _segundos, string _ip, string _puerto, string _falla);
-  string getAll();
+  Registro(std::string _mes, std::string _dia, std::string _horas, std::string _minutos,
+           std::string _segundos, std::string _ip, std::string _puerto, std::string _falla);
+  std::string getAll() const;
   // sobrecarga de operadores de comparacion
   bool operator==(const Registro &other) const;
   bool operator!=(const Registro &other) const;

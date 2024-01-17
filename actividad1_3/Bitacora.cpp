@@ -1,76 +1,87 @@
 #include "Bitacora.h"
-#include <fstream>
-#include <sstream>
 
-void Bitacora::leerArchivo(string filePath) {
-    ifstream archivo(filePath);
-    vector<Registro> listaRegistros;
-  
-    string line;
-    while (getline(archivo, line)) {
-        istringstream iss(line);
-        string mes, dia, horas, minutos, segundos, ip, puerto, falla;
-        if (iss >> mes >> dia >> horas >> minutos >> segundos >> ip >> puerto >> falla) {
-            Registro nuevoRegistro(mes, dia, horas, minutos, segundos, ip, puerto, falla);
-            listaRegistros.push_back(nuevoRegistro);
-        } else {
-            cerr << "Error: Imposible de leer el archivo: " << line << endl;
-        }
+Bitacora::Bitacora(){}
+
+Bitacora::~Bitacora(){}
+
+
+//utilizar metodo getline. tiene tres paramaetros, un caracter (the first argument is a char array, the second argument is the length specified as an integer, and the third argument is a delimeter character)
+void Bitacora::leerArchivo(std::string filePath) {
+  std::ifstream archivo(filePath);
+  std::string line;
+  while (getline(archivo, line)) {
+    std::istringstream iss(line);
+    std::string mes, dia, horas, minutos, segundos, ip, puerto, falla;
+    if (iss >> mes >> dia >> horas >> minutos >> segundos >> ip >> puerto >> falla) {
+      Registro nuevoRegistro(mes, dia, horas, minutos, segundos, ip, puerto, falla);
+      listaRegistros.push_back(nuevoRegistro);
+    } else {
+      std::cerr << "Error: Imposible de leer el archivo: " << line << std::endl;
     }
-    archivo.close();
+  }
+  archivo.close();
 }
 
-void Bitacora::selectionSort(vector<int> &A, int n, unsigned int &compara, unsigned int &swap){
+void Bitacora::selectionSort(int n, unsigned int &compara, unsigned int &swap) {
   compara = swap = 0;
-  for (int i = 0; i < n-1; i++) {
+  for (int i = 0; i < n - 1; i++) {
     int minIndex = i;
     for (int j = i + 1; j < n; j++) {
       compara++;
-      if (A[j] < A[minIndex])
+      if (listaRegistros[j] < listaRegistros[minIndex])
         minIndex = j;
     }
-    std::swap(A[minIndex], A[i]);
+    std::swap(listaRegistros[minIndex], listaRegistros[i]);
     swap++;
   }
 }
 
-int Bitacora::partition(vector<int> &A, int low, int high, unsigned int &compara, unsigned int &swap) {
-  int pivot = A[high];
+int Bitacora::partition( int low, int high, unsigned int &compara, unsigned int &swap) {
+  Registro pivot = listaRegistros[high];
   int i = low - 1;
-  for (int j = low; j < high-1; j++) {
+  for (int j = low; j < high - 1; j++) {
     compara++;
-    if (A[j] < pivot) {
+    if (listaRegistros[j] < pivot) {
       i++;
-      std::swap(A[i], A[j]);
+      std::swap(listaRegistros[i], listaRegistros[j]);
       swap++;
     }
   }
-  std::swap(A[i+1], A[high]);
+  std::swap(listaRegistros[i + 1], listaRegistros[high]);
   swap++;
-  return i + 1;  
+  return i + 1;
 }
 
-void Bitacora::quickSort(vector<int> &A, int low, int high, unsigned int &compara, unsigned int &swap) {
+void Bitacora::quickSort(int low, int high, unsigned int &compara, unsigned int &swap) {
   if (low < high) {
     // encontrar la particion del vector
-    int pi = partition(A, low, high, compara, swap);
+    int pi = partition(low, high, compara, swap);
     // ordenar la particion izquierda y derecha
-    quickSort(A, low, pi - 1, compara, swap);
-    quickSort(A, pi + 1, high, compara, swap);
+    quickSort(low, pi - 1, compara, swap);
+    quickSort(pi + 1, high, compara, swap);
   }
 }
 
+void Bitacora::doQuickSort()
+{
+  unsigned int comparaQuicksort;
+  unsigned int swapQuicksort;
 
-int Bitacora::busquedaBinaria(vector<int> &A, int key, int &compara) {
+  quickSort(0, listaRegistros.size() - 1, comparaQuicksort, swapQuicksort);
+
+  std::cout << "Quicksort - Comparaciones: " << comparaQuicksort << ", Swaps: " << swapQuicksort << std::endl;
+}
+
+int Bitacora::busquedaBinaria(Registro key, int &compara) {
   int l = 0;
-  int r = A.size() - 1;
+  int r = listaRegistros.size() - 1;
   compara = 0;
   while (l <= r) {
     int m = l + (r - l) / 2;
     compara++;
-    if (key == A[m])
+    if (key == listaRegistros[m])
       return m;
-    else if (key < A[m]) 
+    else if (key < listaRegistros[m])
       r = m - 1;
     else
       l = m + 1;
@@ -78,9 +89,8 @@ int Bitacora::busquedaBinaria(vector<int> &A, int key, int &compara) {
   return -1;
 }
 
-void Bitacora::imprimirBitacora(vector<int> &A) const {
-  for (int i = 0; i < A.size(); i++) {
-    cout << A[i] << " ";
+void Bitacora::imprimirBitacora() const {
+  for (int i = 0; i < (int)listaRegistros.size(); i++) {
+    std::cout << listaRegistros[i].getAll() << std::endl;
   }
-  cout << endl;
 }
