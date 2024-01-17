@@ -23,26 +23,22 @@
 
 using namespace std;	
 
-
 int main() {
-Bitacora bitacora;
-bitacora.leerArchivo("bitacora.txt");
-
-unsigned int comparaQuicksort = 0, swapQuicksort = 0;
-bitacora.quickSort(comparaQuicksort, swapQuicksort);
-
-cout << "Quicksort - Comparaciones: " << comparaQuicksort << ", Swaps: " << swapQuicksort << endl;
-
-string fechaInicio, fechaFin;
-cout << "Introduce la fecha de inicio (mes dia hora:minutos:segundos): ";
-getline(cin, fechaInicio);
-cout << "Introduce la fecha de fin (mes dia hora:minutos:segundos): ";
-getline(cin, fechaFin);
-
-//Implementación de busqueda por rango
-
-
-return 0;
+  Bitacora bitacora;
+  bitacora.leerArchivo("bitacora.txt");
+  
+  unsigned int comparaQuicksort = 0, swapQuicksort = 0;
+  bitacora.quickSort(comparaQuicksort, swapQuicksort);
+  
+  cout << "Quicksort - Comparaciones: " << comparaQuicksort << ", Swaps: " << swapQuicksort << endl;
+  
+  string fechaInicio, fechaFin;
+  cout << "Introduce la fecha de inicio (mes dia hora:minutos:segundos): ";
+  getline(cin, fechaInicio);
+  cout << "Introduce la fecha de fin (mes dia hora:minutos:segundos): ";
+  getline(cin, fechaFin);
+  
+  return 0;
 }
 
 /**

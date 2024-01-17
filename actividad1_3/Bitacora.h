@@ -11,20 +11,16 @@
 class Bitacora {
 private:
   vector<Registro> listaRegistros;
-  int partition(std::vector<int> &A, int low, int high, unsigned int &compara,
-                unsigned int &swap);
+  int partition(std::vector<int> &A, int low, int high, unsigned int &compara, unsigned int &swap);
 
 public:
   Bitacora();
   ~Bitacora();
   // TO-DO
   void leerArchivo(string filePath);
-  void selectionSort(vector<int> &A, int n, unsigned int &compara,
-                     unsigned int &swap);
-  void quickSort(vector<int> &A, int low, int high, unsigned int &compara,
-                 unsigned int &swap);
+  void selectionSort(vector<int> &A, int n, unsigned int &compara, unsigned int &swap);
+  void quickSort(vector<int> &A, int low, int high, unsigned int &compara, unsigned int &swap);
   int busquedaBinaria(vector<int> &A, int key, int &compara);
-  // print
   void imprimirBitacora(vector<int> &A) const;
   
 };

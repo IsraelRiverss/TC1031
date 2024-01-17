@@ -19,8 +19,7 @@ private:
   string puerto;
   string falla;
 
-  vector<string> meses = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+  vector<string> meses = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
   // https://cplusplus.com/reference/ctime/tm/
   struct tm dateStruct;
@@ -29,8 +28,7 @@ private:
 
 public:
   Registro();
-  Registro(string _mes, string _dia, string _horas, string _minutos,
-           string _segundos, string _ip, string _puerto, string _falla);
+  Registro(string _mes, string _dia, string _horas, string _minutos, string _segundos, string _ip, string _puerto, string _falla);
   string getAll();
   // sobrecarga de operadores de comparacion
   bool operator==(const Registro &other) const;
