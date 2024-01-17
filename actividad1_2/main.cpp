@@ -106,7 +106,6 @@ int main ()
     }
 
     // Ejecución del algoritmo de búsqueda
-    int searchResult = -1;
     switch (typeSearchAlgorithm) {
         case 1: // Búsqueda Secuencial
             cout << searchObj.busquedaSecuencialVectorOrdenado(vector, key, compara) << endl;// Llama a la función de búsqueda secuencial y imprime el resultado

@@ -25,6 +25,7 @@ public:
                  unsigned int &swap);
   int busquedaBinaria(vector<int> &A, int key, int &compara);
   // print
+  void imprimirBitacora(vector<int> &A) const;
   
 };
 

@@ -78,4 +78,9 @@ int Bitacora::busquedaBinaria(vector<int> &A, int key, int &compara) {
   return -1;
 }
 
-
+void Bitacora::imprimirBitacora(vector<int> &A) const {
+  for (int i = 0; i < A.size(); i++) {
+    cout << A[i] << " ";
+  }
+  cout << endl;
+}
