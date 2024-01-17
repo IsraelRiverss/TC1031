@@ -14,9 +14,11 @@ public:
   void randomShuffle(std::vector<T> &A);
   void printVector(std::vector<T> A);
 
-  void bubbleSort(std::vector<T> &A, int n, unsigned int &compara,unsigned int &swap);
+  void bubbleSort(std::vector<T> &A, int n, unsigned int &compara,
+                  unsigned int &swap);
   void mergeSort(std::vector<T> &A, int low, int high, unsigned int &compara);
-  void quickSort(std::vector<T> &A, int low, int high, unsigned int &compara,unsigned int &swap);
+  void quickSort(std::vector<T> &A, int low, int high, unsigned int &compara,
+                 unsigned int &swap);
 
 private:
   // semilla del generador de numeros aleatorios (time-based)
@@ -24,8 +26,10 @@ private:
   // generador de numeros aleatorios (Mersenne Twister 64 bits)
   std::mt19937_64 gen;
 
-  void merge(std::vector<T> &A, int low, int m, int high, unsigned int &compara);
-  int partition(std::vector<T> &A, int low, int high, unsigned int &compara, unsigned int &swap);
+  void merge(std::vector<T> &A, int low, int m, int high,
+             unsigned int &compara);
+  int partition(std::vector<T> &A, int low, int high, unsigned int &compara,
+                unsigned int &swap);
 };
 
 template <class T> AlgorithmSort<T>::AlgorithmSort() {
@@ -54,7 +58,8 @@ template <class T> void AlgorithmSort<T>::printVector(std::vector<T> A) {
 
 // O(n^2)
 template <class T>
-void AlgorithmSort<T>::bubbleSort(std::vector<T> &A, int n, unsigned int &compara, unsigned int &swap) {
+void AlgorithmSort<T>::bubbleSort(std::vector<T> &A, int n,
+                                  unsigned int &compara, unsigned int &swap) {
   compara = swap = 0;
   for (int i = 0; i < n - 1; i++) {
     for (int j = 0; j < n - i - 1; j++) {
@@ -67,9 +72,9 @@ void AlgorithmSort<T>::bubbleSort(std::vector<T> &A, int n, unsigned int &compar
   }
 }
 
-
 template <class T>
-void AlgorithmSort<T>::merge(std::vector<T> &A, int low, int m, int high, unsigned int &compara) {
+void AlgorithmSort<T>::merge(std::vector<T> &A, int low, int m, int high,
+                             unsigned int &compara) {
   int i, j, k;
   // Calcular el tamaño de los vectores L y R
   int n1 = m - low + 1;
@@ -110,7 +115,8 @@ void AlgorithmSort<T>::merge(std::vector<T> &A, int low, int m, int high, unsign
 
 // O(n log n)
 template <class T>
-void AlgorithmSort<T>::mergeSort(std::vector<T> &A, int low, int high, unsigned int &compara) {
+void AlgorithmSort<T>::mergeSort(std::vector<T> &A, int low, int high,
+                                 unsigned int &compara) {
   if (low < high) {
     // encontrar el punto medio
     int m = low + (high - low) / 2;
@@ -123,7 +129,8 @@ void AlgorithmSort<T>::mergeSort(std::vector<T> &A, int low, int high, unsigned 
 }
 
 template <class T>
-int AlgorithmSort<T>::partition(std::vector<T> &A, int low, int high, unsigned int &compara, unsigned int &swap) {
+int AlgorithmSort<T>::partition(std::vector<T> &A, int low, int high,
+                                unsigned int &compara, unsigned int &swap) {
   T pivot = A[high];
   int i = low - 1;
   for (int j = low; j < high - 1; j++) {
@@ -141,7 +148,8 @@ int AlgorithmSort<T>::partition(std::vector<T> &A, int low, int high, unsigned i
 
 // O(n^2)
 template <class T>
-void AlgorithmSort<T>::quickSort(std::vector<T> &A, int low, int high, unsigned int &compara, unsigned int &swap) {
+void AlgorithmSort<T>::quickSort(std::vector<T> &A, int low, int high,
+                                 unsigned int &compara, unsigned int &swap) {
   if (low < high) {
     // encontrar la particion del vector
     int pi = partition(A, low, high, compara, swap);
