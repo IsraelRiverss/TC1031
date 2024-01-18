@@ -26,6 +26,7 @@ public:
   int busquedaBinaria(Registro key, int &compara);
   void imprimirBitacora() const;
   void imprimirBitacoraOrdenada(std::string filePath) const;
+  
 };
 
 #endif // _BITACORA_H_

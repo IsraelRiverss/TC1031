@@ -45,10 +45,8 @@ int main() {
   cout << "Introduce la fecha de fin (mes dia hora:minutos:segundos): ";
   getline(cin, fechaFin);
 
- // Obtener el timestamp de las fechas de inicio y fin
 
   bitacora.imprimirBitacoraOrdenada("bitacora_ordenada.txt");
-
 
   return 0;
 }

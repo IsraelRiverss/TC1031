@@ -24,8 +24,7 @@ void Bitacora::leerArchivo(std::string filePath) {
       std::getline(archivo, puerto, ' ');
       std::getline(archivo, falla);
       numRecords++;
-      Registro nuevoRegistro(mes, dia, horas, minutos, segundos, ip, puerto,
-                             falla);
+      Registro nuevoRegistro(mes, dia, horas, minutos, segundos, ip, puerto, falla);
       listaRegistros.push_back(nuevoRegistro);
       std::cout << mes << " " << dia << " " << ip << " ";
       std::cout << day << " " << port << std::endl;

@@ -43,6 +43,7 @@ std::string Registro::getAll() const{
   return mes + " " + dia + " " + horas + ":" + minutos + ":" + segundos + " " + ip + ":" + puerto + " " + falla;
 }
 
+
 // sobrecarga de operadores de comparacion
 bool Registro::operator==(const Registro &other) const {
   return this->fechaHora == other.fechaHora;
