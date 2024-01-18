@@ -26,8 +26,9 @@ private:
 
 public:
   Registro();
-  Registro(std::string _mes, std::string _dia, std::string _horas, std::string _minutos,
-           std::string _segundos, std::string _ip, std::string _puerto, std::string _falla);
+  Registro(std::string _mes, std::string _dia, std::string _horas,
+           std::string _minutos, std::string _segundos, std::string _ip,
+           std::string _puerto, std::string _falla);
   std::string getAll() const;
   // sobrecarga de operadores de comparacion
   bool operator==(const Registro &other) const;

@@ -1,26 +1,51 @@
 #include "Bitacora.h"
 
-Bitacora::Bitacora(){}
+Bitacora::Bitacora() {}
 
-Bitacora::~Bitacora(){}
+Bitacora::~Bitacora() {}
 
-
-//utilizar metodo getline. tiene tres paramaetros, un caracter (the first argument is a char array, the second argument is the length specified as an integer, and the third argument is a delimeter character)
 void Bitacora::leerArchivo(std::string filePath) {
+  std::string mes, dia, horas, minutos, segundos, ip, puerto, falla;
+  int day, port;
+  int numRecords = 0;
   std::ifstream archivo(filePath);
-  std::string line;
+  if (!archivo.good()) {
+    archivo.close();
+    throw std::invalid_argument("File not found");
+  } 
+  else {
+    while (!archivo.eof()) {
+      std::getline(archivo, mes, ' ');
+      std::getline(archivo, dia, ' ');
+      std::getline(archivo, horas, ':');
+      std::getline(archivo, minutos, ':');
+      std::getline(archivo, segundos, ' ');
+      std::getline(archivo, ip, ':');
+      std::getline(archivo, puerto, ' ');
+      std::getline(archivo, falla);
+      numRecords++;
+      Registro nuevoRegistro(mes, dia, horas, minutos, segundos, ip, puerto,
+                             falla);
+      listaRegistros.push_back(nuevoRegistro);
+      std::cout << mes << " " << dia << " " << ip << " ";
+      std::cout << day << " " << port << std::endl;
+    }
+    archivo.close();
+  }
+}
+/*
   while (getline(archivo, line)) {
     std::istringstream iss(line);
     std::string mes, dia, horas, minutos, segundos, ip, puerto, falla;
-    if (iss >> mes >> dia >> horas >> minutos >> segundos >> ip >> puerto >> falla) {
-      Registro nuevoRegistro(mes, dia, horas, minutos, segundos, ip, puerto, falla);
-      listaRegistros.push_back(nuevoRegistro);
-    } else {
-      std::cerr << "Error: Imposible de leer el archivo: " << line << std::endl;
+    if (iss >> mes >> dia >> horas >> minutos >> segundos >> ip >> puerto >>
+falla) { Registro nuevoRegistro(mes, dia, horas, minutos, segundos, ip, puerto,
+falla); listaRegistros.push_back(nuevoRegistro); } else { std::cerr << "Error:
+Imposible de leer el archivo: " << line << std::endl;
     }
   }
   archivo.close();
 }
+*/
 
 void Bitacora::selectionSort(int n, unsigned int &compara, unsigned int &swap) {
   compara = swap = 0;
@@ -36,7 +61,8 @@ void Bitacora::selectionSort(int n, unsigned int &compara, unsigned int &swap) {
   }
 }
 
-int Bitacora::partition( int low, int high, unsigned int &compara, unsigned int &swap) {
+int Bitacora::partition(int low, int high, unsigned int &compara,
+                        unsigned int &swap) {
   Registro pivot = listaRegistros[high];
   int i = low - 1;
   for (int j = low; j < high - 1; j++) {
@@ -62,14 +88,14 @@ void Bitacora::quickSort(int low, int high, unsigned int &compara, unsigned int 
   }
 }
 
-void Bitacora::doQuickSort()
-{
+void Bitacora::doQuickSort() {
   unsigned int comparaQuicksort;
   unsigned int swapQuicksort;
 
   quickSort(0, listaRegistros.size() - 1, comparaQuicksort, swapQuicksort);
 
-  std::cout << "Quicksort - Comparaciones: " << comparaQuicksort << ", Swaps: " << swapQuicksort << std::endl;
+  std::cout << "Quicksort - Comparaciones: " << comparaQuicksort
+            << ", Swaps: " << swapQuicksort << std::endl;
 }
 
 int Bitacora::busquedaBinaria(Registro key, int &compara) {
@@ -93,4 +119,12 @@ void Bitacora::imprimirBitacora() const {
   for (int i = 0; i < (int)listaRegistros.size(); i++) {
     std::cout << listaRegistros[i].getAll() << std::endl;
   }
+}
+
+void Bitacora::imprimirBitacoraOrdenada(std::string filePath) const {
+  std::ofstream archivo(filePath);
+  for (int i = 0; i < (int)listaRegistros.size(); i++) {
+    archivo << listaRegistros[i].getAll() << std::endl;
+  }
+  archivo.close();
 }

@@ -1,22 +1,21 @@
-//Guard
 #ifndef _BITACORA_H_
 #define _BITACORA_H_
 
-//Librerias
-#include <sstream>
+// Librerias
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <vector>
-//Class flies
+// Class flies
 #include "Registro.h"
 
 class Bitacora {
 private:
-std::vector<Registro> listaRegistros;
-int partition(int low, int high, unsigned int &compara,unsigned int &swap);
-void quickSort(int low, int high, unsigned int &compara,unsigned int &swap);
+  std::vector<Registro> listaRegistros;
+  int partition(int low, int high, unsigned int &compara, unsigned int &swap);
+  void quickSort(int low, int high, unsigned int &compara, unsigned int &swap);
 
 public:
   Bitacora();
@@ -26,6 +25,7 @@ public:
   void doQuickSort();
   int busquedaBinaria(Registro key, int &compara);
   void imprimirBitacora() const;
+  void imprimirBitacoraOrdenada(std::string filePath) const;
 };
 
 #endif // _BITACORA_H_

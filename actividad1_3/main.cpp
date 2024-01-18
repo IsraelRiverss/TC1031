@@ -1,3 +1,12 @@
+// =========================================================
+// File: main.cpp
+// Authors
+//   - Fernando Israel Rios Garcia-A01709118
+//   - Daniel Aguilar Darío - A01750975
+//   - Luis Daniel Garcia Espinosa - A01643058
+// Created Date: Noviembre 12th, 2024
+// Modification Date: Noviembre 17th, 2024
+// =========================================================
 /**
  * Ejemplo que implementa objetos de la clase Registro
  * que contienen una fecha-hora convertida a Linux timestamp
@@ -19,6 +28,7 @@
 #include "Registro.h"
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <vector>
 
 using namespace std;
@@ -28,13 +38,18 @@ int main() {
   bitacora.leerArchivo("bitacora.txt");
   bitacora.doQuickSort();
   bitacora.imprimirBitacora();
-/*
- string fechaInicio, fechaFin;
+
+  string fechaInicio, fechaFin;
   cout << "Introduce la fecha de inicio (mes dia hora:minutos:segundos): ";
   getline(cin, fechaInicio);
   cout << "Introduce la fecha de fin (mes dia hora:minutos:segundos): ";
   getline(cin, fechaFin);
-*/
+
+ // Obtener el timestamp de las fechas de inicio y fin
+
+  bitacora.imprimirBitacoraOrdenada("bitacora_ordenada.txt");
+
+
   return 0;
 }
 
