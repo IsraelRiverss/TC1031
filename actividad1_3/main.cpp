@@ -33,57 +33,30 @@
 
 using namespace std;
 
-Registro stringARegistro(const string& fecha) {
-  istringstream iss(fecha);
-  string mes, dia, horas, minutos, segundos;
-  if (iss >> mes >> dia >> horas >> minutos >> segundos) {
-    return Registro(mes, dia, horas, minutos, segundos, "", "", "");
-  } else {
-    throw invalid_argument("Formato de fecha inválido");
-  }
-}
-
 int main() {
-  Bitacora bitacora;
-  bitacora.leerArchivo("bitacora.txt");
-  bitacora.doQuickSort();
-  bitacora.imprimirBitacora();
+  Bitacora bitacora;//se crea un objeto de la clase Bitacora
+  bitacora.leerArchivo("bitacora.txt");//Lee el archivo y lo guarda en un vector
+  bitacora.doQuickSort();//Ordena el vector
+  bitacora.imprimirBitacora();//Imprime el vector ordenado
+  bitacora.imprimirBitacoraOrdenada("bitacora_ordenada.txt");//Imprime el vector ordenado en un archivo
 
-  string fechaInicio, fechaFin;
+  string fechaInicio, fechaFin;//Se crean las variables para las fechas de inicio y fin
   cout << "Introduce la fecha de inicio (mes dia hora:minutos:segundos): ";
-  getline(cin, fechaInicio);
+  getline(cin, fechaInicio);//Se lee la fecha de inicio
   cout << "Introduce la fecha de fin (mes dia hora:minutos:segundos): ";
-  getline(cin, fechaFin);
+  getline(cin, fechaFin);//Se lee la fecha de fin
 
-  try {
-    Registro inicio = stringARegistro(fechaInicio);
-    Registro fin = stringARegistro(fechaFin);
-    auto registrosFiltrados = bitacora.obtenerRegistrosEntreFechas(inicio, fin);
+  try {//Se intenta buscar las fechas en el vector
+      Registro inicio = bitacora.convertirEntradaFecha(fechaInicio);//Se convierte la fecha de inicio en un objeto de la clase Registro
+      Registro fin = bitacora.convertirEntradaFecha(fechaFin);//Se convierte la fecha de fin en un objeto de la clase Registro
+      auto registrosFiltrados = bitacora.obtenerRegistrosEntreFechas(inicio, fin);//Se obtienen los registros entre las fechas de inicio y fin
 
-    for (const auto& registro : registrosFiltrados) {
-      cout << registro.getAll() << endl;
-    }
-  } catch (const invalid_argument& e) {
-    cerr << "Error: " << e.what() << endl;
+      for (const auto &registro : registrosFiltrados) {//Se imprimen los registros filtrados
+          cout << registro.getAll() << endl;
+      }
+  } catch (const invalid_argument &e) {//Si las fechas no se encuentran en el vector, se muestra un mensaje de error
+      cerr << "Error: " << e.what() << endl;
   }
-
-  bitacora.imprimirBitacoraOrdenada("bitacora_ordenada.txt");
 
   return 0;
-}
-
-/**
-// Crear objetos de la clase Registro (un renglon de la bitacora)
-Registro a("Feb", "04", "00", "01", "52", "1.1.1.1", "123", "Falla 1");
-Registro b("Feb", "04", "00", "01", "03", "1.1.1.3", "1234", "Falla 2");
-Registro c("Dec", "01", "00", "01", "03", "1.1.1.1", "123", "Falla 1");
-
-std::cout << a.getAll() << std::endl;
-std::cout << b.getAll() << std::endl;
-std::cout << c.getAll() << std::endl;
-
-if (a > b)
-  std::cout << "a mayor b" << std::endl;
-else
-  std::cout << "a menor b" << std::endl;
-**/
+  }

@@ -1,51 +1,38 @@
 #include "Bitacora.h"
 
-Bitacora::Bitacora() {}
+Bitacora::Bitacora() {//Constructor
+  listaRegistros.clear();
+}
 
-Bitacora::~Bitacora() {}
+Bitacora::~Bitacora() {}//Destructor
 
-void Bitacora::leerArchivo(std::string filePath) {
-  std::string mes, dia, horas, minutos, segundos, ip, puerto, falla;
-  int day, port;
-  int numRecords = 0;
-  std::ifstream archivo(filePath);
-  if (!archivo.good()) {
+void Bitacora::leerArchivo(std::string filePath) {//Método para leer el archivo y guardar los datos en un vector de objetos de la clase Registro
+  std::string mes, dia, horas, minutos, segundos, ip, puerto, falla;//Declaración de variables para almacenar los datos de cada línea del archivo
+  std::ifstream archivo(filePath);//Se abre el archivo en modo lectura
+  if (!archivo.good()) {//Se verifica si el archivo se pudo abrir correctamente
     archivo.close();
-    throw std::invalid_argument("File not found");
+    throw std::invalid_argument("File not found");//Se lanza una excepción si el archivo no se pudo abrir
   } 
   else {
-    while (!archivo.eof()) {
+    while (!archivo.eof()) {//Se lee el archivo línea por línea
       std::getline(archivo, mes, ' ');
-      std::getline(archivo, dia, ' ');
-      std::getline(archivo, horas, ':');
-      std::getline(archivo, minutos, ':');
-      std::getline(archivo, segundos, ' ');
-      std::getline(archivo, ip, ':');
-      std::getline(archivo, puerto, ' ');
-      std::getline(archivo, falla);
-      numRecords++;
-      Registro nuevoRegistro(mes, dia, horas, minutos, segundos, ip, puerto, falla);
-      listaRegistros.push_back(nuevoRegistro);
-      std::cout << mes << " " << dia << " " << ip << " ";
-      std::cout << day << " " << port << std::endl;
+      if (mes.length() > 0) {//Se verifica si la línea tiene contenido
+        std::getline(archivo, dia, ' ');
+        std::getline(archivo, horas, ':');
+        std::getline(archivo, minutos, ':');
+        std::getline(archivo, segundos, ' ');
+        std::getline(archivo, ip, ':');
+        std::getline(archivo, puerto, ' ');
+        std::getline(archivo, falla);
+        Registro nuevoRegistro(mes, dia, horas, minutos, segundos, ip, puerto, falla);//Se crea un objeto de la clase Registro con los datos de la línea
+        listaRegistros.push_back(nuevoRegistro);//Se agrega el objeto Registro al vector listaRegistros
+      }
     }
     archivo.close();
   }
 }
-/*
-  while (getline(archivo, line)) {
-    std::istringstream iss(line);
-    std::string mes, dia, horas, minutos, segundos, ip, puerto, falla;
-    if (iss >> mes >> dia >> horas >> minutos >> segundos >> ip >> puerto >>
-falla) { Registro nuevoRegistro(mes, dia, horas, minutos, segundos, ip, puerto,
-falla); listaRegistros.push_back(nuevoRegistro); } else { std::cerr << "Error:
-Imposible de leer el archivo: " << line << std::endl;
-    }
-  }
-  archivo.close();
-}
-*/
 
+//Complejidad O(n)
 void Bitacora::selectionSort(int n, unsigned int &compara, unsigned int &swap) {
   compara = swap = 0;
   for (int i = 0; i < n - 1; i++) {
@@ -60,11 +47,11 @@ void Bitacora::selectionSort(int n, unsigned int &compara, unsigned int &swap) {
   }
 }
 
-int Bitacora::partition(int low, int high, unsigned int &compara,
-                        unsigned int &swap) {
+// Complejidad: O(n)
+int Bitacora::partition(int low, int high, unsigned int &compara,unsigned int &swap) {
   Registro pivot = listaRegistros[high];
   int i = low - 1;
-  for (int j = low; j < high - 1; j++) {
+  for (int j = low; j <= high; j++) {
     compara++;
     if (listaRegistros[j] < pivot) {
       i++;
@@ -77,6 +64,7 @@ int Bitacora::partition(int low, int high, unsigned int &compara,
   return i + 1;
 }
 
+//Complejidad: O(n^2)
 void Bitacora::quickSort(int low, int high, unsigned int &compara, unsigned int &swap) {
   if (low < high) {
     // encontrar la particion del vector
@@ -91,12 +79,12 @@ void Bitacora::doQuickSort() {
   unsigned int comparaQuicksort;
   unsigned int swapQuicksort;
 
-  quickSort(0, listaRegistros.size() - 1, comparaQuicksort, swapQuicksort);
+  quickSort(0, listaRegistros.size()-1, comparaQuicksort, swapQuicksort);
 
-  std::cout << "Quicksort - Comparaciones: " << comparaQuicksort
-            << ", Swaps: " << swapQuicksort << std::endl;
+  std::cout << "Quicksort - Comparaciones: " << comparaQuicksort << ", Swaps: " << swapQuicksort << std::endl;
 }
 
+//Complejidad: O(n)
 int Bitacora::busquedaBinaria(Registro key, int &compara) {
   int l = 0;
   int r = listaRegistros.size() - 1;
@@ -114,27 +102,40 @@ int Bitacora::busquedaBinaria(Registro key, int &compara) {
   return -1;
 }
 
-void Bitacora::imprimirBitacora() const {
-  for (int i = 0; i < (int)listaRegistros.size(); i++) {
-    std::cout << listaRegistros[i].getAll() << std::endl;
+//Complejidad: O(n)
+void Bitacora::imprimirBitacora() const {//Muestra la bitacora
+  for (int i = 0; i < (int)listaRegistros.size(); i++) {//Recorre la bitacora
+    std::cout << listaRegistros[i].getAll() << std::endl;//Imprime la bitacora
   }
 }
 
-void Bitacora::imprimirBitacoraOrdenada(std::string filePath) const {
-  std::ofstream archivo(filePath);
-  for (int i = 0; i < (int)listaRegistros.size(); i++) {
-    archivo << listaRegistros[i].getAll() << std::endl;
+void Bitacora::imprimirBitacoraOrdenada(std::string filePath) const {//Método para imprimir la bitácora ordenada en un archivo nuevo
+  std::ofstream archivo(filePath);//Se crea un archivo nuevo
+  for (int i = 0; i < (int)listaRegistros.size(); i++) {//Se recorre la bitácora
+    archivo << listaRegistros[i].getAll() << std::endl;//Se imprime en el archivo nuevo
   }
   archivo.close();
 }
 
-std::vector<Registro> Bitacora::obtenerRegistrosEntreFechas(const Registro& inicio, const Registro& fin) {
-  std::vector<Registro> registrosFiltrados;
-  for (const auto& registro : listaRegistros) {
-    if (registro >= inicio && registro <= fin) {
-      registrosFiltrados.push_back(registro);
+std::vector<Registro> Bitacora::obtenerRegistrosEntreFechas(const Registro& inicio, const Registro& fin) {//Método para obtener los registros entre dos fechas
+  std::vector<Registro> registrosFiltrados;//Vector para almacenar los registros filtrados
+  for (const auto& registro : listaRegistros) {//Recorremos la lista de registros
+    if (registro >= inicio && registro <= fin) {//Comparamos cada registro con las fechas de inicio y fin
+      registrosFiltrados.push_back(registro);//Agregamos el registro al vector de registros filtrados
     }
   }
   return registrosFiltrados;
 }
 
+Registro Bitacora::convertirEntradaFecha(const std::string& entrada) {//Método para convertir la entrada de fecha en un objeto de tipo Registro
+    std::string mesI, diaI, horaI, minI, segundoI;//Se crean las variables para almacenar los valores de la entrada
+    std::istringstream qwq(entrada);//Se crea un objeto de tipo istringstream para leer la entrada
+
+    std::getline(qwq, mesI, ' ');
+    std::getline(qwq, diaI, ' ');
+    std::getline(qwq, horaI, ':');
+    std::getline(qwq, minI, ':');
+    std::getline(qwq, segundoI);
+
+    return Registro(mesI, diaI, horaI, minI, segundoI, "", "", "");
+}
