@@ -11,9 +11,11 @@
 // Class flies
 #include "Registro.h"
 
+
 class Bitacora {
 private:
   std::vector<Registro> listaRegistros;
+  std::vector<Registro> obtenerRegistrosEntreFechas(const Registro& inicio, const Registro& fin);
   int partition(int low, int high, unsigned int &compara, unsigned int &swap);
   void quickSort(int low, int high, unsigned int &compara, unsigned int &swap);
 

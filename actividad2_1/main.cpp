@@ -8,7 +8,6 @@
 // Modification Date: Noviembre 17th, 2024
 // =========================================================
 
-
 /**
  * Ejemplo que implementa una lista ligada con head y tail
  *
@@ -17,7 +16,7 @@
  * Ejecucion con valgrind:
  *    nix-env -iA nixpkgs.valgrind
  *    valgrind --leak-check=full ./main
- *    https://www.youtube.com/watch?v=8JEEYwdrexc 
+ *    https://www.youtube.com/watch?v=8JEEYwdrexc
  *
  * Compilacion para ejecucion:
  *    g++ -std=c++17 -Wall -O3 -o main *.cpp
@@ -25,8 +24,8 @@
  *    ./main
  **/
 
-#include <iostream>
 #include "LinkedList.h"
+#include <iostream>
 
 int main() {
   LinkedList<int> miLista;
@@ -111,7 +110,7 @@ int main() {
   std::cout << "numElements: " << miLista.getNumElements() << std::endl;
   miLista.printList();
   std::cout << std::endl;
-  
+
   // getData
   try {
     std::cout << "getData(0): " << miLista.getData(0) << std::endl;
@@ -148,7 +147,7 @@ int main() {
   }
   std::cout << std::endl;
 
-  //updateData
+  // updateData
   try {
     std::cout << "updateData(9, 777): " << std::endl;
     miLista.updateData(9, 777);
@@ -175,7 +174,7 @@ int main() {
               << "No se modifico la lista" << std::endl;
   } catch (...) {
     std::cout << "Error desconocido, no se modifico la lista" << std::endl;
-  } 
+  }
   try {
     std::cout << "updateData(110, 55): " << std::endl;
     miLista.updateData(110, 55);
@@ -188,7 +187,7 @@ int main() {
   miLista.printList();
   std::cout << std::endl;
 
-  //updateAt
+  // updateAt
   try {
     std::cout << "updateAt(0, 899): " << std::endl;
     miLista.updateAt(0, 899);
@@ -197,7 +196,7 @@ int main() {
               << "No se modifico la lista" << std::endl;
   } catch (...) {
     std::cout << "Error desconocido, no se modifico la lista" << std::endl;
-  } 
+  }
   try {
     std::cout << "updateData(11, 5775): " << std::endl;
     miLista.updateAt(11, 5775);
@@ -244,11 +243,13 @@ int main() {
 
   // Imprimir el resultado de la búsqueda
   if (posicion != -1) {
-      std::cout << "El valor " << valorABuscar << " se encuentra en la posición: " << posicion << std::endl;
+    std::cout << "El valor " << valorABuscar
+              << " se encuentra en la posición: " << posicion << std::endl;
   } else {
-      std::cout << "El valor " << valorABuscar << " no se encuentra en la lista." << std::endl;
+    std::cout << "El valor " << valorABuscar << " no se encuentra en la lista."
+              << std::endl;
   }
-  
+
   std::cout << "miLista antes de la copia: ";
   miLista.printList();
 

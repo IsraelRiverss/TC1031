@@ -127,3 +127,14 @@ void Bitacora::imprimirBitacoraOrdenada(std::string filePath) const {
   }
   archivo.close();
 }
+
+std::vector<Registro> Bitacora::obtenerRegistrosEntreFechas(const Registro& inicio, const Registro& fin) {
+  std::vector<Registro> registrosFiltrados;
+  for (const auto& registro : listaRegistros) {
+    if (registro >= inicio && registro <= fin) {
+      registrosFiltrados.push_back(registro);
+    }
+  }
+  return registrosFiltrados;
+}
+

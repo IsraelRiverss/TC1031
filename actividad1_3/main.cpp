@@ -33,6 +33,16 @@
 
 using namespace std;
 
+Registro stringARegistro(const string& fecha) {
+  istringstream iss(fecha);
+  string mes, dia, horas, minutos, segundos;
+  if (iss >> mes >> dia >> horas >> minutos >> segundos) {
+    return Registro(mes, dia, horas, minutos, segundos, "", "", "");
+  } else {
+    throw invalid_argument("Formato de fecha inválido");
+  }
+}
+
 int main() {
   Bitacora bitacora;
   bitacora.leerArchivo("bitacora.txt");
@@ -45,6 +55,17 @@ int main() {
   cout << "Introduce la fecha de fin (mes dia hora:minutos:segundos): ";
   getline(cin, fechaFin);
 
+  try {
+    Registro inicio = stringARegistro(fechaInicio);
+    Registro fin = stringARegistro(fechaFin);
+    auto registrosFiltrados = bitacora.obtenerRegistrosEntreFechas(inicio, fin);
+
+    for (const auto& registro : registrosFiltrados) {
+      cout << registro.getAll() << endl;
+    }
+  } catch (const invalid_argument& e) {
+    cerr << "Error: " << e.what() << endl;
+  }
 
   bitacora.imprimirBitacoraOrdenada("bitacora_ordenada.txt");
 
