@@ -19,8 +19,8 @@
   ./main
 
   Ejecución con redireccion (input and output):
-    ./main < ./actividad1_2/TestCases/test01.txt
-    ./main < ./actividad1_2/TestCases/test01.txt > salida.txt
+    ./main < ./actividad2_2/
+    ./main < ./actividad2_2/ 
 */
 
 int mian ()

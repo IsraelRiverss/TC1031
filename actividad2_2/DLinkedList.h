@@ -26,6 +26,8 @@ class DLinkedList {
     T getData(int position);
     void updateData(T value, T newValue);
     void updateAt(int position, T newValue);
+    DLinkedList<T>* DLinkedList<T>::getReversedSublist(int start, int end);
+
     
 };
 
@@ -284,5 +286,31 @@ void DLinkedList<T>::updateAt(int position, T newValue) {
   }
 }
 
+// Complejidad O
+template <class T>
+DLinkedList<T>* DLinkedList<T>::getReversedSublist(int start, int end)
+{
+  //Verificar que el rango sea valido
+  if (start <0 || end >= numElements || start > end)
+  {
+    throw std::out_of_range("Rango invalido");
+    return nullptr;
+  }
+  else
+  {
+    //1. Crear una nueva lista
+    DLinkedList<T>* newList = new DLinkedList<T>();
+    DLLNode<T>* p = head;
+    int index = 0;
+    while (p != nullptr && index <= end)
+    {
+      if (index >= start)
+        newList->addFirst(p->data);
+      p = p->next;
+      index++;
+    }
+      return newList;
+    } 
+  }
 
 #endif  // _DOUBLELINKEDLIST_H_
