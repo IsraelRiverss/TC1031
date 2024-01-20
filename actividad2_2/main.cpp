@@ -40,6 +40,7 @@ int main() {
   miLista.printReverseList();
   std::cout << std::endl;
 
+<<<<<<< HEAD
   // addLast
   std::cout << "Agregando 5 elementos al final..." << std::endl;
   for (int i = 20; i < 26; i++) {
@@ -49,6 +50,12 @@ int main() {
   miLista.printList();
   miLista.printReverseList();
   std::cout << std::endl;
+=======
+  Ejecución con redireccion (input and output):
+    ./main < ./actividad2_2/
+    ./main < ./actividad2_2/ 
+*/
+>>>>>>> 01a410095817f8e6814159d9ca9efc829c5e9b7b
 
   // deleteData
   std::cout << "Delete 12: " << std::endl;
