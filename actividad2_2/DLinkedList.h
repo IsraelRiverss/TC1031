@@ -26,7 +26,7 @@ class DLinkedList {
     T getData(int position);
     void updateData(T value, T newValue);
     void updateAt(int position, T newValue);
-    DLinkedList<T>* DLinkedList<T>::getReversedSublist(int start, int end);
+    DLinkedList<T>*getReversedSublist(int start, int end);
 
     
 };
