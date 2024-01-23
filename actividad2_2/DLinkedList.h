@@ -11,6 +11,8 @@ class DLinkedList {
     DLLNode<T> *head;
     DLLNode<T> *tail;
     int numElements;
+    DLLNode<T>* partition(DLLNode<T>* l, DLLNode<T>* h);
+    void _quickSort(DLLNode<T>* l, DLLNode<T>* h);
 
   public:
     DLinkedList();
@@ -20,15 +22,14 @@ class DLinkedList {
     void printReverseList();
     void addFirst(T value);
     void addLast(T value);
-    
+    void invert();
     bool deleteData(T value);
     bool deleteAt(int position);
     T getData(int position);
     void updateData(T value, T newValue);
     void updateAt(int position, T newValue);
+    void quickSort(DLLNode<T>* head, DLLNode<T>* tail);
     DLinkedList<T>*getReversedSublist(int start, int end);
-
-    
 };
 
 // Complejidad O(1)
@@ -287,7 +288,11 @@ void DLinkedList<T>::updateAt(int position, T newValue) {
   }
 }
 
-// Complejidad O
+/*
+Descrpcion de getReversedSublist:
+Regresa una nueva sublista que comprende los elementos, en orden inverso, que se ubican entre las posiciones inicio y fin de la lista (se incluyen los extremos del intervalo, i.e., inicio y fin).
+*/
+// Complejidad O(n)
 template <class T>
 DLinkedList<T>* DLinkedList<T>::getReversedSublist(int start, int end)
 {
@@ -311,7 +316,70 @@ DLinkedList<T>* DLinkedList<T>::getReversedSublist(int start, int end)
       index++;
     }
       return newList;
-    } 
+  } 
+}
+
+// Complejidad O(n)
+template<typename T>
+DLLNode<T>* partition(DLLNode<T>* l, DLLNode<T>* h)
+{
+    T x = h->data;
+    DLLNode<T>* i = l->prev;
+
+    DLLNode<T>* j;
+    for (j = l; j != h; j = j->next)
+    {
+        if (j->data <= x)
+        {
+            i = (i == nullptr) ? l : i->next;
+            std::swap(i->data, j->data);
+        }
+    }
+    i = (i == nullptr) ? l : i->next;
+    std::swap(i->data, j->data);
+    return i;
+}
+
+// Complejidad O(n log n)
+template<typename T>
+void DLinkedList<T>::_quickSort(DLLNode<T>* l, DLLNode<T>* h)
+{
+    if (h != nullptr && l != h && l != h->next)
+    {
+        DLLNode<T>* p = partition(l, h);
+        _quickSort(l, p->prev);
+        _quickSort(p->next, h);
+    }
+}
+
+// Cambia la función principal quickSort
+template <class T>
+void DLinkedList<T>::quickSort(DLLNode<T>* head, DLLNode<T> *tail) {
+    _quickSort(head, tail);
+}
+
+// Complejidad O(n)
+template <class T>
+void DLinkedList<T>::invert(){
+  //Si la lista está vacía o tiene solo un elemento, no es necesario hacer nada
+  if (head == nullptr || tail == nullptr){
+    return;
   }
+  DLLNode<T> *current = head;
+  DLLNode<T> *temp = nullptr;
+  // Recorre la lista e intercambia los punteros next y prev de cada nodo
+  while (current != nullptr){
+    temp = current->next;
+    current->next = current->prev;
+    current->prev = temp;
+    // Avanza al siguiente nodo (que era el previo)
+    current = temp;
+  }
+  // Intercambia head y tail
+  temp = head;
+  head = tail;
+  tail = temp;
+}
+
 
 #endif  // _DOUBLELINKEDLIST_H_

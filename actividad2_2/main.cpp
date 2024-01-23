@@ -16,7 +16,7 @@
  * Ejecucion con valgrind:
  *    nix-env -iA nixpkgs.valgrind
  *    valgrind --leak-check=full ./main
- *    https://www.youtube.com/watch?v=8JEEYwdrexc 
+ *    https://www.youtube.com/watch?v=8JEEYwdrexc
  *
  * Compilacion para ejecucion:
  *    g++ -std=c++17 -Wall -O3 -o main *.cpp
@@ -24,8 +24,8 @@
  *    ./main
  **/
 
-#include <iostream>
 #include "DLinkedList.h"
+#include <iostream>
 
 int main() {
   DLinkedList<int> miLista;
@@ -40,7 +40,6 @@ int main() {
   miLista.printReverseList();
   std::cout << std::endl;
 
-<<<<<<< HEAD
   // addLast
   std::cout << "Agregando 5 elementos al final..." << std::endl;
   for (int i = 20; i < 26; i++) {
@@ -50,12 +49,6 @@ int main() {
   miLista.printList();
   miLista.printReverseList();
   std::cout << std::endl;
-=======
-  Ejecución con redireccion (input and output):
-    ./main < ./actividad2_2/
-    ./main < ./actividad2_2/ 
-*/
->>>>>>> 01a410095817f8e6814159d9ca9efc829c5e9b7b
 
   // deleteData
   std::cout << "Delete 12: " << std::endl;
@@ -119,7 +112,7 @@ int main() {
   std::cout << "numElements: " << miLista.getNumElements() << std::endl;
   miLista.printList();
   std::cout << std::endl;
-  
+
   // getData
   try {
     std::cout << "getData(0): " << miLista.getData(0) << std::endl;
@@ -156,7 +149,7 @@ int main() {
   }
   std::cout << std::endl;
 
-  //updateData
+  // updateData
   try {
     std::cout << "updateData(9, 777): " << std::endl;
     miLista.updateData(9, 777);
@@ -183,7 +176,7 @@ int main() {
               << "No se modifico la lista" << std::endl;
   } catch (...) {
     std::cout << "Error desconocido, no se modifico la lista" << std::endl;
-  } 
+  }
   try {
     std::cout << "updateData(110, 55): " << std::endl;
     miLista.updateData(110, 55);
@@ -196,7 +189,7 @@ int main() {
   miLista.printList();
   std::cout << std::endl;
 
-  //updateAt
+  // updateAt
   try {
     std::cout << "updateAt(0, 899): " << std::endl;
     miLista.updateAt(0, 899);
@@ -205,7 +198,7 @@ int main() {
               << "No se modifico la lista" << std::endl;
   } catch (...) {
     std::cout << "Error desconocido, no se modifico la lista" << std::endl;
-  } 
+  }
   try {
     std::cout << "updateData(11, 5775): " << std::endl;
     miLista.updateAt(11, 5775);
@@ -233,6 +226,53 @@ int main() {
   } catch (...) {
     std::cout << "Error desconocido, no se modifico la lista" << std::endl;
   }
+  miLista.printList();
+  std::cout << std::endl;
+
+  /*
+    //QuickSort
+    miLista.quickSort(miLista.head, miLista.tail);
+    std::cout << "QuickSort:" << std::endl;
+    miLista.printList();
+    std::cout << std::endl;
+  */
+
+  // getReversedSublist
+  try {
+    int inicio = 2;
+    int fin = 5;
+    std::cout << "getReversedSublist(2, 5): " << std::endl;
+    // Imprimir la lista original
+    std::cout << "Lista original: ";
+    miLista.printList();
+    std::cout << std::endl;
+
+    // Obtener y mostrar la sublista inversa
+    std::cout << "Sublista inversa desde " << inicio << " hasta " << fin << ": " << std::endl;
+    DLinkedList<int> *sublistaInversa = miLista.getReversedSublist(inicio, fin);
+
+    std::cout << "Sublista inversa: ";
+    sublistaInversa->printList();
+    std::cout << std::endl;
+
+    // Limpieza de memoria para la sublista
+    delete sublistaInversa;
+    
+  } catch (const std::out_of_range &e) {
+    std::cout << "Error: " << e.what() << std::endl
+              << "No se modifico la lista" << std::endl;
+    
+  } catch (...) {
+    std::cout << "Error desconocido, no se modifico la lista" << std::endl;
+  }
+  //Revisar que no se modifique la lista original
+  std::cout << "Lista original después de obtener la sublista inversa: ";
+  miLista.printList();
+  std::cout << std::endl;
+
+  // Invertir lista
+  miLista.invert();
+  std::cout << "Lista invertida:" << std::endl;
   miLista.printList();
   std::cout << std::endl;
 
