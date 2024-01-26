@@ -12,7 +12,9 @@ Registro::Registro() {
   fechaHora = 0;
 }
 
-Registro::Registro(std::string _mes, std::string _dia, std::string _horas, std::string _minutos, std::string _segundos, std::string _ip, std::string _puerto, std::string _falla) {
+Registro::Registro(std::string _mes, std::string _dia, std::string _horas,
+                   std::string _minutos, std::string _segundos, std::string _ip,
+                   std::string _puerto, std::string _falla) {
   mes = _mes;
   dia = _dia;
   horas = _horas;
@@ -36,13 +38,13 @@ Registro::Registro(std::string _mes, std::string _dia, std::string _horas, std::
   // Obtener el Linux timestamp
   // https://cplusplus.com/reference/ctime/mktime/
   fechaHora = mktime(&dateStruct);
-  //cout << "fechaHora: " << fechaHora << endl;
+  // cout << "fechaHora: " << fechaHora << endl;
 }
 
-std::string Registro::getAll() const{
-  return mes + " " + dia + " " + horas + ":" + minutos + ":" + segundos + " " + ip + ":" + puerto + " " + falla;
+std::string Registro::getAll() const {
+  return mes + " " + dia + " " + horas + ":" + minutos + ":" + segundos + " " +
+         ip + ":" + puerto + " " + falla;
 }
-
 
 // sobrecarga de operadores de comparacion
 bool Registro::operator==(const Registro &other) const {
